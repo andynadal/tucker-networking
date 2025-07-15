@@ -7,20 +7,23 @@ let package = Package(
     name: "TuckerNetworking",
     platforms: [
         .macOS(.v14),
-        .iOS(.v17)
+        .iOS(.v17),
+        .watchOS(.v10),
+        .visionOS(.v1),
+        .macCatalyst(.v13)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "TuckerNetworking",
             targets: ["TuckerNetworking"]
         ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "TuckerNetworking"
+            name: "TuckerNetworking",
+            swiftSettings: [
+                .unsafeFlags(["-swift-version", "6"])
+            ],
         ),
         .testTarget(
             name: "TuckerNetworkingTests",
