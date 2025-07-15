@@ -21,9 +21,6 @@ let package = Package(
     targets: [
         .target(
             name: "TuckerNetworking",
-            swiftSettings: [
-                .unsafeFlags(["-swift-version", "6"])
-            ],
         ),
         .testTarget(
             name: "TuckerNetworkingTests",
