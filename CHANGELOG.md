@@ -1,8 +1,10 @@
 # TuckerNetworking Changelog
 
-## 0.1.0
+## 0.1.1
 
-### TuckerNetworking
+- Solved access to initializers
+ 
+## 0.1.0
 
 - Added `ServiceProvider`
 - Added `Service`

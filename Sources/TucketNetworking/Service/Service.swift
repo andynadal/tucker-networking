@@ -5,7 +5,7 @@ import Foundation
 
 /// An instance of a service, used in each network call
 public actor Service<Provider: ServiceProvider> {
-    init(url: String) throws {
+    public init(url: String) throws {
         guard let url = URL(string: url) else { throw NetworkingError.malformedRequest("Invalid URL") }
         self.request = URLRequest(url: url)
     }
