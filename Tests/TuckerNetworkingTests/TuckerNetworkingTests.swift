@@ -12,19 +12,23 @@ enum TestProvider: ServiceProvider {
             throw .malformedRequest(error.localizedDescription)
         }
     }
+    
+    static func useHeaders() async throws(NetworkingError) -> [Header] {
+        [.init(header: "Content-Type", value: "application/json")]
+    }
 }
 
 struct ErrorBody: Decodable, Sendable {
     let error: String
 }
 
-struct Phone: Decodable {
+struct Phone: Codable {
     let id: String
     let name: String
     let data: PhoneMetadata?
 }
 
-struct PhoneMetadata: Decodable {
+struct PhoneMetadata: Codable {
     let color: String?
     let capacity: String?
     let price: Double?
@@ -33,5 +37,11 @@ struct PhoneMetadata: Decodable {
 @Test func testGetObjects() async throws {
     let data: [Phone] = try await TestProvider.route("/objects")
         .get()
+    print(data)
+}
+
+@Test func testPostObject() async throws {
+    let data: [Phone] = try await TestProvider.route("/objects")
+        .post(body: Phone(id: "0", name: "iPhone", data: nil))
     print(data)
 }
