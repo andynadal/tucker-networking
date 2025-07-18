@@ -14,7 +14,9 @@ enum TestProvider: ServiceProvider {
     }
     
     static func useHeaders() async throws(NetworkingError) -> [Header] {
-        [.init(header: "Content-Type", value: "application/json")]
+        [
+            .init(header: "Content-Type", value: "application/json")
+        ]
     }
 }
 

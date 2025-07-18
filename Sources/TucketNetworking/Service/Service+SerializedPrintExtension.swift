@@ -54,8 +54,9 @@ extension Service {
         print("-> Sending Request --")
         print("-> \(request.httpMethod ?? "No HTTP Method") | \(request.url?.absoluteString ?? "No URL")")
         for header in request.allHTTPHeaderFields ?? [:] {
-            if ["authorization", "api-key"].contains(header.key.lowercased()) {
-                print("-- \(header): *****")
+            guard !["authorization", "api-key"].contains(header.key.lowercased()) else {
+                print("-- \(header.key): *****")
+                continue
             }
             print("-> \(header.key): \(header.value)")
         }

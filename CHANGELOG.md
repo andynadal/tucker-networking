@@ -1,5 +1,9 @@
 # TuckerNetworking Changelog
 
+## 0.1.4
+
+- Fixed issue logging Authorization headers
+
 ## 0.1.3
 
 - Added better debugging and logging tools
