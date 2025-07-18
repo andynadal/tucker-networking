@@ -12,16 +12,17 @@ public extension Service {
         await setup()
         request.httpMethod = "POST"
         request.httpBody = try Provider.encoder().encode(body)
+        prettyPrint(request: request)
         let (data, response) = try await URLSession.shared.data(for: request)
-        printAndSerialize(json: data)
         if let httpResponse = response as? HTTPURLResponse {
+            prettyPrint(response: httpResponse)
+            printAndSerialize(.response, json: data)
             do {
                 switch httpResponse.statusCode {
                 case 200..<300:
                     break
                 default:
                     let error = try Provider.decoder().decode(Provider.ErrorBodyType.self, from: data)
-                    printAndSerialize(json: data)
                     throw NetworkingError.invalidResponse(.init(code: httpResponse.statusCode, body: error))
                 }
             } catch {
@@ -33,6 +34,29 @@ public extension Service {
             return body
         } catch {
             throw error
+        }
+    }
+    
+    func post<R: Encodable>(body: R) async throws {
+        await setup()
+        request.httpMethod = "POST"
+        request.httpBody = try Provider.encoder().encode(body)
+        prettyPrint(request: request)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        if let httpResponse = response as? HTTPURLResponse {
+            prettyPrint(response: httpResponse)
+            printAndSerialize(.response, json: data)
+            do {
+                switch httpResponse.statusCode {
+                case 200..<300:
+                    break
+                default:
+                    let error = try Provider.decoder().decode(Provider.ErrorBodyType.self, from: data)
+                    throw NetworkingError.invalidResponse(.init(code: httpResponse.statusCode, body: error))
+                }
+            } catch {
+                throw error
+            }
         }
     }
 }

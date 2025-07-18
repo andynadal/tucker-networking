@@ -37,11 +37,21 @@ struct PhoneMetadata: Codable {
 @Test func testGetObjects() async throws {
     let data: [Phone] = try await TestProvider.route("/objects")
         .get()
-    print(data)
+    assert(data.count > 0)
 }
 
 @Test func testPostObject() async throws {
-    let data: [Phone] = try await TestProvider.route("/objects")
+    let data: Phone = try await TestProvider.route("/objects")
         .post(body: Phone(id: "0", name: "iPhone", data: nil))
-    print(data)
+    assert(data.name == "iPhone")
+}
+
+@Test func testGetObjectsWithoutParsingResponse() async throws {
+    try await TestProvider.route("/objects")
+        .get()
+}
+
+@Test func testPostObjectWithoutParsingResponse() async throws {
+    try await TestProvider.route("/objects")
+        .post(body: Phone(id: "0", name: "iPhone", data: nil))
 }
