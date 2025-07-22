@@ -15,6 +15,7 @@ public protocol ServiceProvider: Sendable {
     static func decoder() -> JSONDecoder
     static func encoder() -> JSONEncoder
     static func route(_ string: String) throws(NetworkingError) -> Service<Self>
+    static func session() -> URLSession
     
     associatedtype ErrorBodyType: Decodable & Sendable
 }
@@ -30,5 +31,9 @@ public extension ServiceProvider {
     
     static func encoder() -> JSONEncoder {
         JSONEncoder()
+    }
+    
+    static func session() -> URLSession {
+        .shared
     }
 }

@@ -1,5 +1,9 @@
 # TuckerNetworking Changelog
 
+## 0.1.5
+
+- Added PATCH, PUT & DELETE methods
+
 ## 0.1.4
 
 - Fixed issue logging Authorization headers
