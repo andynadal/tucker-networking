@@ -1,5 +1,9 @@
 # TuckerNetworking Changelog
 
+## 0.1.8
+
+- Fixed issues with `Package.swift`
+
 ## 0.1.7
 
 - Swift tooling to 5.10

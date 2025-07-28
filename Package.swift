@@ -20,7 +20,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "TuckerNetworking",
+            name: "TuckerNetworking"
         ),
         .testTarget(
             name: "TuckerNetworkingTests",
