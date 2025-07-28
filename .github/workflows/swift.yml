@@ -11,12 +11,24 @@ on:
 
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: macos-14 # macos-latest may default to macos-13, this ensures latest Xcode
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      - uses: actions/checkout@v4
+
+      - name: Install Swift 6.1 toolchain
+        run: |
+          curl -L -o swift.pkg https://download.swift.org/swift-6.1-release/xcode/swift-6.1-RELEASE/swift-6.1-RELEASE-osx.pkg
+          sudo installer -pkg swift.pkg -target /
+        # Optional: verify install path
+
+      - name: Set Swift 6.1 as default
+        run: |
+          sudo xcrun --find swift
+          export TOOLCHAINS=swift
+
+      - name: Build
+        run: TOOLCHAINS=swift swift build -v
+
+      - name: Run tests
+        run: TOOLCHAINS=swift swift test -v
