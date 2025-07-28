@@ -1,5 +1,9 @@
 # TuckerNetworking Changelog
 
+## 0.1.7
+
+- Swift tooling to 5.10
+
 ## 0.1.6
 
 - Fixed swift tool version issue
