@@ -5,7 +5,7 @@
 //  Created by Andy Nadal on 7/15/25.
 //
 
-public struct Header {
+public struct Header: Sendable {
     public init(header: String, value: String) {
         self.header = header
         self.value = value

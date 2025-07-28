@@ -1,5 +1,9 @@
 # TuckerNetworking Changelog
 
+## 0.1.6
+
+- Fixed swift tool version issue
+
 ## 0.1.5
 
 - Added PATCH, PUT & DELETE methods

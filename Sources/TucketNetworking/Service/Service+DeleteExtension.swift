@@ -38,6 +38,6 @@ public extension Service {
         await setup()
         request.httpMethod = "DELETE"
         prettyPrint(request: request)
-        let (data, response) = try await Provider.session().data(for: request)
+        let (_, _) = try await Provider.session().data(for: request)
     }
 }
