@@ -1,5 +1,10 @@
 # TuckerNetworking Changelog
 
+## 0.1.9
+
+- Added bodyless post
+- Added queries
+
 ## 0.1.8
 
 - Fixed issues with `Package.swift`

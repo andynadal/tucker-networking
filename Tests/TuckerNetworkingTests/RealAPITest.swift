@@ -93,5 +93,4 @@ extension RealSuite {
         let capacity: String?
         let price: Double?
     }
-
 }

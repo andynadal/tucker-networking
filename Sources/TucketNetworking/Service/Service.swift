@@ -5,7 +5,6 @@ import Foundation
 
 /// An instance of a service, used in each network call
 public actor Service<Provider: ServiceProvider> {
-    
     var request: URLRequest
     
     public init(url: String) throws {
@@ -23,8 +22,9 @@ public actor Service<Provider: ServiceProvider> {
         }
     }
     
-    public func add(header: String, value: String) {
-        request.addValue(value, forHTTPHeaderField: "Authorization")
+    public func add(header: String, value: String) -> Self {
+        request.addValue(value, forHTTPHeaderField: header)
+        return self
     }
     
     func process(_ data: Data, and response: URLResponse) throws {
@@ -51,5 +51,16 @@ public actor Service<Provider: ServiceProvider> {
         } catch {
             throw error
         }
+    }
+}
+
+// Extension to convert Encodable objects to dictionaries for query parameters
+extension Encodable {
+    func asDictionary() throws -> [String: Any] {
+        let data = try JSONEncoder().encode(self)
+        guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+            throw NSError(domain: "EncodingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode as dictionary"])
+        }
+        return dictionary
     }
 }

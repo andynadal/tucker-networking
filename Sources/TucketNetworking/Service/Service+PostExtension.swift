@@ -24,4 +24,12 @@ public extension Service {
         let (data, response) = try await Provider.session().data(for: request)
         try process(data, and: response)
     }
+    
+    func post() async throws {
+        await setup()
+        request.httpMethod = "POST"
+        prettyPrint(request: request)
+        let (data, response) = try await Provider.session().data(for: request)
+        try process(data, and: response)
+    }
 }
