@@ -7,7 +7,7 @@
 
 public extension Service {
     func put<R: Encodable, D: Decodable>(body: R) async throws -> D {
-        await setup()
+        try await setup()
         request.httpMethod = "PUT"
         request.httpBody = try Provider.encoder().encode(body)
         prettyPrint(request: request)
@@ -17,7 +17,7 @@ public extension Service {
     }
     
     func put<R: Encodable>(body: R) async throws {
-        await setup()
+        try await setup()
         request.httpMethod = "PUT"
         request.httpBody = try Provider.encoder().encode(body)
         prettyPrint(request: request)

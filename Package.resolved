@@ -1,0 +1,15 @@
+{
+  "originHash" : "3e80020f80d3d1bcc5088e18f673ea0958f5f275c0fa8f9b759d7b905d63999a",
+  "pins" : [
+    {
+      "identity" : "hyperconnectivity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rwbutler/hyperconnectivity",
+      "state" : {
+        "revision" : "2dd9fcc032668da97a424e4d8347faa649d3d016",
+        "version" : "1.2.1"
+      }
+    }
+  ],
+  "version" : 3
+}

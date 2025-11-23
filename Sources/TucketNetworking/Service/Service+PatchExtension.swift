@@ -7,7 +7,7 @@
 
 public extension Service {
     func patch<R: Encodable, D: Decodable>(body: R) async throws -> D {
-        await setup()
+        try await setup()
         request.httpMethod = "PATCH"
         request.httpBody = try Provider.encoder().encode(body)
         prettyPrint(request: request)
@@ -17,7 +17,7 @@ public extension Service {
     }
     
     func patch<R: Encodable>(body: R) async throws {
-        await setup()
+        try await setup()
         request.httpMethod = "PATCH"
         request.httpBody = try Provider.encoder().encode(body)
         prettyPrint(request: request)

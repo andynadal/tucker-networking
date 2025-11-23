@@ -18,9 +18,15 @@ let package = Package(
             targets: ["TuckerNetworking"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/rwbutler/hyperconnectivity", from: "1.2.0")
+    ],
     targets: [
         .target(
-            name: "TuckerNetworking"
+            name: "TuckerNetworking",
+            dependencies: [
+                .product(name: "Hyperconnectivity", package: "hyperconnectivity")
+            ],
         ),
         .testTarget(
             name: "TuckerNetworkingTests",

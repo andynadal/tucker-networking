@@ -6,19 +6,20 @@ import Foundation
 /// An instance of a service, used in each network call
 public actor Service<Provider: ServiceProvider> {
     var request: URLRequest
+    var checkConnectivity = Provider.checksForConnectivity()
     
     public init(url: String) throws {
         guard let url = URL(string: url) else { throw NetworkingError.malformedRequest("Invalid URL") }
         self.request = URLRequest(url: url)
     }
     
-    func setup() async {
-        do {
-            for header in try await Provider.useHeaders() {
-                self.request.addValue(header.value, forHTTPHeaderField: header.header)
-            }
-        } catch {
-            
+    func setup() async throws {
+        for header in try await Provider.useHeaders() {
+            self.request.addValue(header.value, forHTTPHeaderField: header.header)
+        }
+        guard checkConnectivity else { return }
+        guard await Provider.networkProvider().connected else {
+            throw await NetworkingError.noConnection(Network.global.state)
         }
     }
     

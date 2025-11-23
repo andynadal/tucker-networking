@@ -9,7 +9,7 @@ import Foundation
 
 public extension Service {
     func get<D: Decodable>() async throws -> D {
-        await setup()
+        try await setup()
         request.httpMethod = "GET"
         prettyPrint(request: request)
         let (data, response) = try await Provider.session().data(for: request)
@@ -18,7 +18,7 @@ public extension Service {
     }
     
     func get() async throws {
-        await setup()
+        try await setup()
         request.httpMethod = "GET"
         prettyPrint(request: request)
         let (data, response) = try await Provider.session().data(for: request)

@@ -8,4 +8,5 @@
 public enum NetworkingError: Error {
     case malformedRequest(String)
     case invalidResponse(ErrorWrapper)
+    case noConnection(Connection)
 }

@@ -16,7 +16,9 @@ public protocol ServiceProvider: Sendable {
     static func encoder() -> JSONEncoder
     static func route(_ string: String) throws(NetworkingError) -> Service<Self>
     static func session() -> URLSession
-    
+    static func checksForConnectivity() -> Bool
+    static func networkProvider() async -> Network
+
     associatedtype ErrorBodyType: Decodable & Sendable
 }
 
@@ -35,5 +37,13 @@ public extension ServiceProvider {
     
     static func session() -> URLSession {
         .shared
+    }
+    
+    static func checksForConnectivity() -> Bool {
+        true
+    }
+    
+    static func networkProvider() async -> Network {
+        await Network.global
     }
 }
