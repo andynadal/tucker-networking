@@ -16,6 +16,15 @@ public extension Service {
         return try decode(data: data)
     }
     
+    func post<D: Decodable>() async throws -> D {
+        try await setup()
+        request.httpMethod = "POST"
+        prettyPrint(request: request)
+        let (data, response) = try await Provider.session().data(for: request)
+        try process(data, and: response)
+        return try decode(data: data)
+    }
+
     func post<R: Encodable>(body: R) async throws {
         try await setup()
         request.httpMethod = "POST"
